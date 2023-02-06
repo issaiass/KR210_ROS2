@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<robot>
+
+  <!-- Link0 -->
+  <gazebo reference="base_link">
+    <material>Gazebo/Grey</material>
+    <mu1>2</mu1>
+    <mu2>2</mu2>
+    <!--turnGravityOff>true</turnGravityOff-->    
+  </gazebo>
+
+  <!-- Link1 -->
+  <gazebo reference="link_1">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <!--turnGravityOff>true</turnGravityOff-->        
+  </gazebo>
+
+  <!-- Link2 -->
+  <gazebo reference="link_2">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <!--turnGravityOff>true</turnGravityOff-->        
+  </gazebo>
+
+  <!-- Link3 -->
+  <gazebo reference="link_3">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <!--turnGravityOff>true</turnGravityOff-->        
+  </gazebo>
+
+
+  <!-- Link4 -->
+  <gazebo reference="link_4">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <!--turnGravityOff>true</turnGravityOff-->        
+  </gazebo>
+
+  <!-- Link5 -->
+  <gazebo reference="link_5">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <!--turnGravityOff>true</turnGravityOff-->        
+  </gazebo>
+
+  <!-- Link6 -->
+  <gazebo reference="link_6">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <!--turnGravityOff>true</turnGravityOff-->     
+  </gazebo>
+
+  <!-- Gripper -->
+  <gazebo reference="gripper_link">
+    <material>Gazebo/Grey</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <!--turnGravityOff>true</turnGravityOff-->        
+  </gazebo>
+
+  <gazebo reference="left_gripper_finger_link">
+    <material>Gazebo/Grey</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+    <!--turnGravityOff>true</turnGravityOff-->        
+  </gazebo>
+
+  <gazebo reference="right_gripper_finger_link">
+    <material>Gazebo/Grey</material>
+    <kp>1000000.0</kp>
+    <kd>1.0</kd>
+    <mu1>30.0</mu1>
+    <mu2>30.0</mu2>
+    <!--turnGravityOff>true</turnGravityOff-->        
+  </gazebo>
+
+
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+      <parameters>$(find kr210_control)/config/trajectory_controller.yaml</parameters>
+      <!--parameters>$(find kr210_control)/config/position_controller.yaml</parameters-->      
+    </plugin>
+  </gazebo>
+  
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+  
+    <joint name="joint_1">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <param name="initial_position">0.0</param>  
+    </joint>
+    <joint name="joint_2">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <param name="initial_position">-1.57</param>  
+    </joint>
+    <joint name="joint_3">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <param name="initial_position">0.0</param>  
+    </joint>
+    <joint name="joint_4">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <param name="initial_position">0.0</param>  
+    </joint>    
+      <joint name="joint_5">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <param name="initial_position">0.0</param>  
+    </joint>
+    <joint name="joint_6">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <param name="initial_position">0.0</param>  
+    </joint>    
+
+    <joint name="right_gripper_finger_joint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <param name="initial_position">0.0</param>  
+    </joint>
+    <joint name="left_gripper_finger_joint">
+      <param name="mimic">right_gripper_finger_joint</param>
+      <param name="multiplier">-1</param>    
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <param name="initial_position">0.0</param>  
+    </joint>
+
+
+  </ros2_control>
+
+</robot>
